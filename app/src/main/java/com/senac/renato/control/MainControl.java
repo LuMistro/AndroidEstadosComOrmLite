@@ -43,7 +43,7 @@ public class MainControl {
         configListViewEstados();
     }
 
-    private void configSpinner(){
+    private void configSpinner() {
         try {
             paisDao.getDao().createIfNotExists(new Pais(1, "Brasil"));
             paisDao.getDao().createIfNotExists(new Pais(2, "Argentina"));
@@ -60,7 +60,7 @@ public class MainControl {
         }
     }
 
-    private void configListViewEstados(){
+    private void configListViewEstados() {
         //Elementos da lista
         try {
             listEstados = estadoDao.getDao().queryForAll();
@@ -78,7 +78,7 @@ public class MainControl {
         addCliqueCurtoLvEstados();
     }
 
-    private void addCliqueLongoLvEstados(){
+    private void addCliqueLongoLvEstados() {
         activity.getLvEstados().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -89,7 +89,7 @@ public class MainControl {
         });
     }
 
-    public void addCliqueCurtoLvEstados(){
+    public void addCliqueCurtoLvEstados() {
         activity.getLvEstados().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -116,7 +116,7 @@ public class MainControl {
         });
     }
 
-    private Estado getEstadoForm(){
+    private Estado getEstadoForm() {
         Estado e = new Estado();
         e.setNome(activity.getEditNomeEstado().getText().toString());
         e.setUf(activity.getEditUf().getText().toString());
@@ -125,20 +125,20 @@ public class MainControl {
     }
 
 
-    private void limparForm(){
+    private void limparForm() {
         activity.getEditNomeEstado().setText("");
         activity.getEditUf().setText("");
     }
 
-    public void popularFormAction(Estado e){
+    public void popularFormAction(Estado e) {
         activity.getEditNomeEstado().setText(e.getNome());
         activity.getEditUf().setText(e.getUf());
     }
 
-    public void confirmarExclusaoAction(final Estado e){
+    public void confirmarExclusaoAction(final Estado e) {
         AlertDialog.Builder alerta = new AlertDialog.Builder(activity);
         alerta.setTitle("Excluindo estado");
-        alerta.setMessage("Deseja realmente excluir o estado " + e.getNome()+"?");
+        alerta.setMessage("Deseja realmente excluir o estado " + e.getNome() + "?");
         alerta.setIcon(android.R.drawable.ic_menu_delete);
         alerta.setNegativeButton("Não", new DialogInterface.OnClickListener() {
             @Override
@@ -163,13 +163,13 @@ public class MainControl {
     }
 
 
-    private void cadastrar(){
+    private void cadastrar() {
         Estado estado = getEstadoForm();
         try {
             int res = estadoDao.getDao().create(estado); //Envia par o banco de dados
             adapterEstados.add(estado); //Atualiza no ListView
 
-            if(res>0){
+            if (res > 0) {
                 Toast.makeText(activity, "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(activity, "Tente novamente em breve", Toast.LENGTH_SHORT).show();
@@ -183,14 +183,14 @@ public class MainControl {
         }
     }
 
-    private void editar(Estado newEstado){
+    private void editar(Estado newEstado) {
         estado.setNome(newEstado.getNome());
         estado.setUf(newEstado.getUf());
         estado.setPais(newEstado.getPais());
         try {
             adapterEstados.notifyDataSetChanged(); //Atualiza no view
             int res = estadoDao.getDao().update(estado); //Editar no banco de dados
-            if(res>0){
+            if (res > 0) {
                 Toast.makeText(activity, "Sucesso", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(activity, "Tente mais tarde", Toast.LENGTH_SHORT).show();
@@ -200,8 +200,14 @@ public class MainControl {
         }
     }
 
-    public void salvarAction(){
-        if(estado==null){
+    public void atualizaSpinDePaises() {
+        adapterPaises.clear();
+        adapterPaises.addAll(paisDao.listar());
+        adapterPaises.notifyDataSetChanged();
+    }
+
+    public void salvarAction() {
+        if (estado == null) {
             cadastrar();
         } else {
             editar(getEstadoForm());
@@ -221,8 +227,6 @@ public class MainControl {
         } catch (SQLException e) {
             e.printStackTrace();
         }*/
-
-
 
         limparForm();
     }

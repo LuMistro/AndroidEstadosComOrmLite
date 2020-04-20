@@ -2,6 +2,7 @@ package com.senac.renato.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +29,13 @@ public class MainActivity extends AppCompatActivity {
         control = new MainControl(this);
     }
 
-    private void initialize(){
+    @Override
+    protected void onStart() {
+        super.onStart();
+        control.atualizaSpinDePaises();
+    }
+
+    private void initialize() {
         spPaises = findViewById(R.id.spinnerPais);
         lvEstados = findViewById(R.id.lvEstados);
         editNomeEstado = findViewById(R.id.editNomeEstado);
@@ -40,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
                 control.salvarAction();
             }
         });
+    }
+
+    public void proximaTela(View view) {
+
+        Intent intent = new Intent(this, PaisActivity.class);
+        startActivity(intent);
     }
 
     public EditText getEditNomeEstado() {

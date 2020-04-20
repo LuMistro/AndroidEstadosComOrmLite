@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#ededed"
+    android:orientation="vertical"
     android:padding="16dp"
     tools:context=".view.MainActivity">
 
@@ -15,57 +15,56 @@
         android:orientation="horizontal">
 
         <Spinner
+            android:id="@+id/spinnerPais"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:id="@+id/spinnerPais"
-            />
+            android:layout_weight="3" />
+
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_add"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:onClick="proximaTela"
+            android:src="@android:drawable/ic_menu_add" />
     </LinearLayout>
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <EditText
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"
-            android:hint="@string/nome_do_estado"
             android:id="@+id/editNomeEstado"
             style="@style/editText"
-            />
-        <EditText
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            style="@style/editText"
+            android:layout_weight="3"
+            android:hint="@string/nome_do_estado" />
+
+        <EditText
             android:id="@+id/editUf"
-            android:hint="@string/uf"/>
+            style="@style/editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/uf" />
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnSalvar"
+        style="@style/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/salvar"
-        android:background="@color/colorPrimary"
-        android:textColor="#fff"
-        android:id="@+id/btnSalvar"
         android:layout_margin="5dp"
-        style="@style/button"
-        />
+        android:background="@color/colorPrimary"
+        android:text="@string/salvar"
+        android:textColor="#fff" />
 
     <ListView
+        android:id="@+id/lvEstados"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:id="@+id/lvEstados"
-        ></ListView>
+        android:layout_margin="5dp"></ListView>
 
 </LinearLayout>
